@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="mycontainer flex justify-center items-center gap-1">
         <p className="fs-caption">&copy; {new Date().getFullYear()} Tithely All Rights Reserved</p>
         <p className="fs-base">∙</p>
-        <Link to='/tithely-supabase/style-guide' className="fs-caption">Style Guide</Link>
+        <Link to='/style-guide' className="fs-caption">Style Guide</Link>
       </div>
     </section>
   )

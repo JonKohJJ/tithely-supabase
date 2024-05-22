@@ -65,31 +65,31 @@ function App() {
           {( user && session ) &&
             <>
               <Route element={<NotLoggedInLayout isDark={isDark} setIsDark={setIsDark} />}>
-                <Route path="/tithely-supabase" element={<Home />}/>
-                <Route path="/tithely-supabase/style-guide" element={<StyleGuide />}/>
+                <Route path="/" element={<Home />}/>
+                <Route path="/style-guide" element={<StyleGuide />}/>
               </Route>
               <Route element={<LoggedInLayout isDark={isDark} setIsDark={setIsDark} />}>
-                <Route path="/tithely-supabase/login" element={ <Dashboard types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} filteredYear={filteredYear} setFilteredYear={setFilteredYear} filteredMonth={filteredMonth} setFilteredMonth={setFilteredMonth} /> }/>
-                <Route path="/tithely-supabase/signup" element={ <Dashboard types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} filteredYear={filteredYear} setFilteredYear={setFilteredYear} filteredMonth={filteredMonth} setFilteredMonth={setFilteredMonth} /> }/>
-                <Route path="/tithely-supabase/planner" element={ <Planner types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} /> }/>
-                <Route path="/tithely-supabase/tracker" element={ <Tracker types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} filteredYear={filteredYear} setFilteredYear={setFilteredYear} filteredMonth={filteredMonth} setFilteredMonth={setFilteredMonth} /> }/>
-                <Route path="/tithely-supabase/dashboard" element={ <Dashboard types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} filteredYear={filteredYear} setFilteredYear={setFilteredYear} filteredMonth={filteredMonth} setFilteredMonth={setFilteredMonth} /> }/>
-                <Route path="/tithely-supabase/settings" element={<Settings />}/>
-                <Route path="/tithely-supabase/style-guide" element={<StyleGuide />}/>
+                <Route path="/login" element={ <Dashboard types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} filteredYear={filteredYear} setFilteredYear={setFilteredYear} filteredMonth={filteredMonth} setFilteredMonth={setFilteredMonth} /> }/>
+                <Route path="/signup" element={ <Dashboard types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} filteredYear={filteredYear} setFilteredYear={setFilteredYear} filteredMonth={filteredMonth} setFilteredMonth={setFilteredMonth} /> }/>
+                <Route path="/planner" element={ <Planner types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} /> }/>
+                <Route path="/tracker" element={ <Tracker types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} filteredYear={filteredYear} setFilteredYear={setFilteredYear} filteredMonth={filteredMonth} setFilteredMonth={setFilteredMonth} /> }/>
+                <Route path="/dashboard" element={ <Dashboard types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} filteredYear={filteredYear} setFilteredYear={setFilteredYear} filteredMonth={filteredMonth} setFilteredMonth={setFilteredMonth} /> }/>
+                <Route path="/settings" element={<Settings />}/>
+                <Route path="/style-guide" element={<StyleGuide />}/>
               </Route>
             </>
           }
 
           { !( user && session ) &&
             <Route element={<NotLoggedInLayout isDark={isDark} setIsDark={setIsDark} />}>
-              <Route path="/tithely-supabase" element={<Home />}/>
-              <Route path="/tithely-supabase/login" element={<Login isDark={isDark} />}/>
-              <Route path="/tithely-supabase/signup" element={<Signup isDark={isDark} />}/>
-              <Route path="/tithely-supabase/planner" element={ <Login isDark={isDark} /> }/>
-              <Route path="/tithely-supabase/tracker" element={ <Login isDark={isDark} /> }/>
-              <Route path="/tithely-supabase/dashboard" element={ <Login isDark={isDark} /> }/>
-              <Route path="/tithely-supabase/settings" element={ <Login isDark={isDark} /> }/>
-              <Route path="/tithely-supabase/style-guide" element={<StyleGuide />}/>
+              <Route path="/" element={<Home />}/>
+              <Route path="/login" element={<Login isDark={isDark} />}/>
+              <Route path="/signup" element={<Signup isDark={isDark} />}/>
+              <Route path="/planner" element={ <Login isDark={isDark} /> }/>
+              <Route path="/tracker" element={ <Login isDark={isDark} /> }/>
+              <Route path="/dashboard" element={ <Login isDark={isDark} /> }/>
+              <Route path="/settings" element={ <Login isDark={isDark} /> }/>
+              <Route path="/style-guide" element={<StyleGuide />}/>
             </Route>
           }
       

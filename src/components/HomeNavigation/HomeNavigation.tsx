@@ -27,7 +27,7 @@ const HomeNavigation = ({ isDark, setIsDark }: { isDark: boolean, setIsDark: Rea
 
                 <div className="home-nav-content flex justify-between items-center laptop:items-center">
 
-                    <Link to='/tithely-supabase' className="flex items-center" onClick={() => {setIsActive(false)}}>
+                    <Link to='/' className="flex items-center" onClick={() => {setIsActive(false)}}>
                         <HiMiniPaperAirplane className="transform rotate-[-90deg] text-color-icon-fill h-full w-[25px]"/> 
                         <p className="fs-h2">Tithely</p>
                     </Link>
@@ -67,9 +67,9 @@ const HomeNavigation = ({ isDark, setIsDark }: { isDark: boolean, setIsDark: Rea
 
 
                             { !(user && session) ?
-                                <PrimaryButton text="Log In To Get Started" destination="/tithely-supabase/login" onClickFunction={() => {setIsActive(false)}} additionalClasses="!py-[20px] laptop:!py-[8px] mt-auto laptop:mt-0" />
+                                <PrimaryButton text="Log In To Get Started" destination="/login" onClickFunction={() => {setIsActive(false)}} additionalClasses="!py-[20px] laptop:!py-[8px] mt-auto laptop:mt-0" />
                                 :
-                                <PrimaryButton text="Go To Dashboard" destination="/tithely-supabase/dashboard" onClickFunction={() => {setIsActive(false)}} additionalClasses="!py-[20px] laptop:!py-[8px] mt-auto laptop:mt-0" />
+                                <PrimaryButton text="Go To Dashboard" destination="/dashboard" onClickFunction={() => {setIsActive(false)}} additionalClasses="!py-[20px] laptop:!py-[8px] mt-auto laptop:mt-0" />
                             }
 
                         </div>

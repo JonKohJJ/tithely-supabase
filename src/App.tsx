@@ -24,6 +24,7 @@ import Signup from "./pages/Signup"
 
 function App() {
 
+  console.log('Rendering App component');
   const { user, session } = useAuthContext()
 
   // fetching common data that a few component need

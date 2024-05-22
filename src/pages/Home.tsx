@@ -60,9 +60,9 @@ const Home = () => {
                             </p>
 
                             { !(user && session) ?
-                                <PrimaryButton text="Log In To Get Started" destination="/login" />
+                                <PrimaryButton text="Log In To Get Started" destination="/tithely-supabase/login" />
                                 :
-                                <PrimaryButton text="Go To Dashboard" destination="/dashboard" />
+                                <PrimaryButton text="Go To Dashboard" destination="/tithely-supabase/dashboard" />
                             }
                         </div>
                     </div>

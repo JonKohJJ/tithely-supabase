@@ -1,29 +1,28 @@
-import { useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
-import PrimaryButton from "../components/Buttons/PrimaryButton";
-import SecondaryButton from "../components/Buttons/SecondaryButton";
-import supabase from "../config/supabaseClient";
+// import { useState } from "react";
+// import PrimaryButton from "../components/Buttons/PrimaryButton";
+// import SecondaryButton from "../components/Buttons/SecondaryButton";
+// import supabase from "../config/supabaseClient";
 
 const Settings = () => {
 
   const { user } = useAuthContext()
-  console.log('user: ', user)
 
-  const [isDeleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+  // const [isDeleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
 
-  const handleDeleteConfirmation = () => {
-    setDeleteConfirmationOpen(true);
-  };
+  // const handleDeleteConfirmation = () => {
+  //   setDeleteConfirmationOpen(true);
+  // };
 
-  const handleCancelDelete = () => {
-    setDeleteConfirmationOpen(false);
-  };
+  // const handleCancelDelete = () => {
+  //   setDeleteConfirmationOpen(false);
+  // };
 
-  const handleDeleteAccount = async () => {
-    if (user) {
-      // const { data, error } = await supabase.auth.admin.deleteUser(user?.id)
-    }
-  };
+  // const handleDeleteAccount = async () => {
+  //   if (user) {
+  //     const { data, error } = await supabase.auth.admin.deleteUser(user?.id)
+  //   }
+  // };
  
 
   return (

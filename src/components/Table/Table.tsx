@@ -87,8 +87,6 @@ const Table = ({
     const [quickCredit, setQuickCredit] = useState<boolean>(false)
     const [quickDebit, setQuickDebit] = useState<boolean>(false)
 
-    const [isLoading, setIsLoading] = useState(false)
-
     return (
         
         <table className={`table-component ${pathname.slice(1)} w-full mb-4 border-solid border-[1px] border-color-border bg-color-card-background rounded block`}>
@@ -110,77 +108,73 @@ const Table = ({
                             <td className={`hidden laptop:block laptop:w-[9%] laptop:text-right`}>Actions</td>
                         </tr>
                     </thead>
-                    {isLoading ? <p className='px-[20px] min-h-[20vh] flex justify-center items-center'>Loading...</p> : 
-                    <>
-                        <tbody className={`table-body block px-[20px]`}>
-                            {plannerData.categories.length !== 0?
-                                (
-                                    plannerData.categories.map(cat => {
-                                        return (
-                                            (AddingUpdatingID === cat.id && setAddingUpdatingID) ?
-                                                <tr key={cat.id} className='block'>
-                                                    <PlannerForm type={plannerData.type} type_id={plannerData.type_id} method='Updating' setAddingUpdatingID={setAddingUpdatingID} updating_cat_id={cat.id} updating_cat_name={cat.category_name} updating_cat_budget={cat.category_budget}/>
+                    <tbody className={`table-body block px-[20px]`}>
+                        {plannerData.categories.length !== 0?
+                            (
+                                plannerData.categories.map(cat => {
+                                    return (
+                                        (AddingUpdatingID === cat.id && setAddingUpdatingID) ?
+                                            <tr key={cat.id} className='block'>
+                                                <PlannerForm type={plannerData.type} type_id={plannerData.type_id} method='Updating' setAddingUpdatingID={setAddingUpdatingID} updating_cat_id={cat.id} updating_cat_name={cat.category_name} updating_cat_budget={cat.category_budget}/>
+                                            </tr>
+                                        :
+                                            deleteID === cat.id ?
+                                                <tr key={cat.id} className='w-full block my-4'>
+                                                    <div className='w-full bg-red-600 p-[20px] rounded flex justify-between items-center'>
+                                                        <div>
+                                                            <p className='font-bold !text-white'>Deleting '{cat.category_name}'' from {plannerData.type}. Are you sure?</p>
+                                                            <p className='font-medium !text-white'>You will also delete {NChildTransactions === 1 ? `${NChildTransactions} transaction` : `${NChildTransactions} transactions`} under this category.</p>
+                                                        </div>
+                                                        <div>
+                                                            <PrimaryButton text='Yes, Delete' onClickFunction={() => { handleDelete(cat.id) }} additionalClasses='mr-2'/>
+                                                            <SecondaryButton text='Back' onClickFunction={() => { setDeleteID(null) }}/>
+                                                        </div>
+                                                    </div>
                                                 </tr>
                                             :
-                                                deleteID === cat.id ?
-                                                    <tr key={cat.id} className='w-full block my-4'>
-                                                        <div className='w-full bg-red-600 p-[20px] rounded flex justify-between items-center'>
-                                                            <div>
-                                                                <p className='font-bold !text-white'>Deleting '{cat.category_name}'' from {plannerData.type}. Are you sure?</p>
-                                                                <p className='font-medium !text-white'>You will also delete {NChildTransactions === 1 ? `${NChildTransactions} transaction` : `${NChildTransactions} transactions`} under this category.</p>
-                                                            </div>
-                                                            <div>
-                                                                <PrimaryButton text='Yes, Delete' onClickFunction={() => { handleDelete(cat.id) }} additionalClasses='mr-2'/>
-                                                                <SecondaryButton text='Back' onClickFunction={() => { setDeleteID(null) }}/>
-                                                            </div>
-                                                        </div>
-                                                    </tr>
-                                                :
-                                                    <tr key={cat.id} className={`border-solid border-color-border border-b-[1px] py-[10px] flex items-center`}>
-                                                        <td className={`w-[75%] laptop:flex laptop:items-center`}>
-                                                            {plannerData.type === 'Expenses' ?
-                                                                <span onClick={() => {handleFixedExpenseChange(cat.id, cat.fixed_expense)}} className='hidden cursor-pointer laptop:block laptop:mr-2'>
-                                                                    {
-                                                                        (cat.fixed_expense !== undefined && cat.fixed_expense) ?
-                                                                        <BsLockFill />
-                                                                        :
-                                                                        <BsUnlock />
-                                                                    }
-                                                                </span>
-                                                            :
-                                                                ''
-                                                            }
-                                                            <p className='line-clamp-1'>{cat.category_name}</p>
-                                                        </td> 
-                                                        <td className={`w-[25%] text-right laptop:w-[15%] laptop:text-left`}>${cat.category_budget}</td>
-                                                        <td className={`hidden laptop:block laptop:w-[9%] laptop:text-right`}>
-                                                            <button onClick={() => { setAddingUpdatingID && setAddingUpdatingID(cat.id); setDeleteID(null) }} className='p-2'><FiEdit className='w-5 h-5 hover:fill-color-icon-fill' /></button>
-                                                            <button onClick={() => { onDelete(cat.id) }} className='p-2 pr-0'><FiTrash className='w-5 h-5 hover:fill-color-icon-fill' /></button>
-                                                        </td>
-                                                    </tr>
-                                        )
-                                    })
-                                )
-                                :
-                                <tr><td><p>No Categories Found</p></td></tr>
-                            }
-                            {(AddingUpdatingID === plannerData.type_id && setAddingUpdatingID) &&
-                                <PlannerForm type={plannerData.type} type_id={plannerData.type_id} method='Adding' setAddingUpdatingID={setAddingUpdatingID}/>
-                            }
-                        </tbody>
-                        <tfoot className={`table-footer block px-[20px]`}> 
-                            <tr className='flex items-center py-[20px] font-medium'>
-                                <td className={`w-[50%] laptop:w-[75%]`}>Total</td>
-                                <td className={`w-[50%] text-right laptop:w-[15%] laptop:text-left`}>
-                                    <span>
-                                        <p>${plannerData.total}</p>
-                                        <p className='fs-caption'>{plannerData.footerDescription}</p>
-                                    </span>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </>
-                    }
+                                                <tr key={cat.id} className={`border-solid border-color-border border-b-[1px] py-[10px] flex items-center`}>
+                                                    <td className={`w-[75%] laptop:flex laptop:items-center`}>
+                                                        {plannerData.type === 'Expenses' ?
+                                                            <span onClick={() => {handleFixedExpenseChange(cat.id, cat.fixed_expense)}} className='hidden cursor-pointer laptop:block laptop:mr-2'>
+                                                                {
+                                                                    (cat.fixed_expense !== undefined && cat.fixed_expense) ?
+                                                                    <BsLockFill />
+                                                                    :
+                                                                    <BsUnlock />
+                                                                }
+                                                            </span>
+                                                        :
+                                                            ''
+                                                        }
+                                                        <p className='line-clamp-1'>{cat.category_name}</p>
+                                                    </td> 
+                                                    <td className={`w-[25%] text-right laptop:w-[15%] laptop:text-left`}>${cat.category_budget}</td>
+                                                    <td className={`hidden laptop:block laptop:w-[9%] laptop:text-right`}>
+                                                        <button onClick={() => { setAddingUpdatingID && setAddingUpdatingID(cat.id); setDeleteID(null) }} className='p-2'><FiEdit className='w-5 h-5 hover:fill-color-icon-fill' /></button>
+                                                        <button onClick={() => { onDelete(cat.id) }} className='p-2 pr-0'><FiTrash className='w-5 h-5 hover:fill-color-icon-fill' /></button>
+                                                    </td>
+                                                </tr>
+                                    )
+                                })
+                            )
+                            :
+                            <tr><td><p>No Categories Found</p></td></tr>
+                        }
+                        {(AddingUpdatingID === plannerData.type_id && setAddingUpdatingID) &&
+                            <PlannerForm type={plannerData.type} type_id={plannerData.type_id} method='Adding' setAddingUpdatingID={setAddingUpdatingID}/>
+                        }
+                    </tbody>
+                    <tfoot className={`table-footer block px-[20px]`}> 
+                        <tr className='flex items-center py-[20px] font-medium'>
+                            <td className={`w-[50%] laptop:w-[75%]`}>Total</td>
+                            <td className={`w-[50%] text-right laptop:w-[15%] laptop:text-left`}>
+                                <span>
+                                    <p>${plannerData.total}</p>
+                                    <p className='fs-caption'>{plannerData.footerDescription}</p>
+                                </span>
+                            </td>
+                        </tr>
+                    </tfoot>
                 </>
             }
 
@@ -276,8 +270,6 @@ const Table = ({
                         </tr>
                     </thead>
                     <tbody className='table-body block px-[20px] pb-[20px]'>
-
-                        {isLoading ? <p className='min-h-[50vh] flex justify-center items-center'>Loading...</p> :
                             <>
                                 {(isAdding && setAddingUpdatingID) ? 
                                     <TrackerForm method={'Adding'} setAddingUpdatingID={setAddingUpdatingID} setIsAdding={setIsAdding} quickCredit={quickCredit} quickDebit={quickDebit} />
@@ -346,8 +338,6 @@ const Table = ({
                                     <tr><td>No Transactions Found</td></tr>
                                 }
                             </>
-                            
-                        }
                     </tbody>
                 </>
             }
@@ -378,54 +368,51 @@ const Table = ({
                             <td className={`hidden laptop:block laptop:w-[9%] laptop:text-right`}>Excess</td>
                         </tr>
                     </thead>
-                    {isLoading ? <p className='px-[20px] min-h-[20vh] flex justify-center items-center'>Loading...</p> : 
-                        <>
-                            <tbody className='table-body block px-[20px] pb-[20px]'>
-                                {dashboardData.categories.length !== 0 ?
-                                    (
-                                        dashboardData.categories.map(cat => {
-                                            if ( cat !== undefined ) {
-                                                return (
-                                                    <tr key={cat.category_name} className='border-solid border-color-border border-b-[1px] py-[15px] flex items-center'>
-                                                        <td className='w-[50%] laptop:w-[25%] pr-4'><p className='pr-2 line-clamp-1'>{cat.category_name}</p></td>
-                                                        <td className={`hidden laptop:block laptop:w-[9%]`}>${cat.tracked}</td>
-                                                        <td className={`hidden laptop:block laptop:w-[9%]`}>${cat.budget}</td>
-                                                        <td className='w-[50%] laptop:w-[39%] text-center relative overflow-hidden rounded-xl bg-color-border'>
-                                                            <div style={{width: `${cat.percentage_completed}%`}} 
-                                                                className={`progress absolute top-0 left-0 h-full ${cat.percentage_completed > 100 ? (dashboardData.type === 'Expenses' ? 'bg-color-icon-fill-red' : 'bg-color-icon-fill') : 'bg-color-icon-fill' }`}
-                                                            >
-                                                            </div>
-                                                            <p className='fs-caption text-white relative !text-[8px]'>{cat.percentage_completed}%</p>
-                                                        </td>
-                                                        <td className={`hidden laptop:block laptop:w-[9%] laptop:text-right`}>${cat.remaining}</td>
-                                                        <td className={`hidden laptop:block laptop:w-[9%] laptop:text-right`}>${cat.excess}</td>
-                                                    </tr>
-                                                )
-                                            }
-                                        })
-                                    )
-                                    :
-                                    <tr><td><p>No Categories Found</p></td></tr>
-                                }   
-                            </tbody>
-                            <tfoot className='table-footer block px-[20px]'> 
-                                <tr className='flex items-center py-[20px] font-medium'>
-                                    <td className={`w-[50%] laptop:w-[25%]`}>Total</td>
-                                    <td className={`hidden laptop:block laptop:w-[9%]`}>${dashboardData.footerTotals.trackedTotals}</td>
-                                    <td className={`hidden laptop:block laptop:w-[9%]`}>${dashboardData.footerTotals.budgetTotals}</td>
-                                    <td className='w-[50%] laptop:w-[39%] relative overflow-hidden rounded-xl bg-color-border'> 
-                                        <div style={{width: `${dashboardData.footerTotals.percentageCompletedTotals}%`}} 
-                                            className={`progress absolute top-0 left-0 h-full ${dashboardData.footerTotals.percentageCompletedTotals > 100 ? (dashboardData.type === 'Expenses' ? 'bg-color-icon-fill-red' : 'bg-color-icon-fill') : 'bg-color-icon-fill' }`}
-                                        >
-                                        </div>
-                                        <p className='fs-caption relative text-center text-white !text-[8px]'>{dashboardData.footerTotals.percentageCompletedTotals}%</p>
-                                    </td>
-                                    <td className={`hidden laptop:block laptop:w-[9%] laptop:text-right`}>${dashboardData.footerTotals.remainingTotals}</td>
-                                    <td className={`hidden laptop:block laptop:w-[9%] laptop:text-right`}>${dashboardData.footerTotals.excessTotals}</td>
-                                </tr>
-                            </tfoot>
-                        </>
-                    }      
+                    <tbody className='table-body block px-[20px] pb-[20px]'>
+                        {dashboardData.categories.length !== 0 ?
+                            (
+                                dashboardData.categories.map(cat => {
+                                    if ( cat !== undefined ) {
+                                        return (
+                                            <tr key={cat.category_name} className='border-solid border-color-border border-b-[1px] py-[15px] flex items-center'>
+                                                <td className='w-[50%] laptop:w-[25%] pr-4'><p className='pr-2 line-clamp-1'>{cat.category_name}</p></td>
+                                                <td className={`hidden laptop:block laptop:w-[9%]`}>${cat.tracked}</td>
+                                                <td className={`hidden laptop:block laptop:w-[9%]`}>${cat.budget}</td>
+                                                <td className='w-[50%] laptop:w-[39%] text-center relative overflow-hidden rounded-xl bg-color-border'>
+                                                    <div style={{width: `${cat.percentage_completed}%`}} 
+                                                        className={`progress absolute top-0 left-0 h-full ${cat.percentage_completed > 100 ? (dashboardData.type === 'Expenses' ? 'bg-color-icon-fill-red' : 'bg-color-icon-fill') : 'bg-color-icon-fill' }`}
+                                                    >
+                                                    </div>
+                                                    <p className='fs-caption text-white relative !text-[8px]'>{cat.percentage_completed}%</p>
+                                                </td>
+                                                <td className={`hidden laptop:block laptop:w-[9%] laptop:text-right`}>${cat.remaining}</td>
+                                                <td className={`hidden laptop:block laptop:w-[9%] laptop:text-right`}>${cat.excess}</td>
+                                            </tr>
+                                        )
+                                    }
+                                })
+                            )
+                            :
+                            <tr><td><p>No Categories Found</p></td></tr>
+                        }   
+                    </tbody>
+                    <tfoot className='table-footer block px-[20px]'> 
+                        <tr className='flex items-center py-[20px] font-medium'>
+                            <td className={`w-[50%] laptop:w-[25%]`}>Total</td>
+                            <td className={`hidden laptop:block laptop:w-[9%]`}>${dashboardData.footerTotals.trackedTotals}</td>
+                            <td className={`hidden laptop:block laptop:w-[9%]`}>${dashboardData.footerTotals.budgetTotals}</td>
+                            <td className='w-[50%] laptop:w-[39%] relative overflow-hidden rounded-xl bg-color-border'> 
+                                <div style={{width: `${dashboardData.footerTotals.percentageCompletedTotals}%`}} 
+                                    className={`progress absolute top-0 left-0 h-full ${dashboardData.footerTotals.percentageCompletedTotals > 100 ? (dashboardData.type === 'Expenses' ? 'bg-color-icon-fill-red' : 'bg-color-icon-fill') : 'bg-color-icon-fill' }`}
+                                >
+                                </div>
+                                <p className='fs-caption relative text-center text-white !text-[8px]'>{dashboardData.footerTotals.percentageCompletedTotals}%</p>
+                            </td>
+                            <td className={`hidden laptop:block laptop:w-[9%] laptop:text-right`}>${dashboardData.footerTotals.remainingTotals}</td>
+                            <td className={`hidden laptop:block laptop:w-[9%] laptop:text-right`}>${dashboardData.footerTotals.excessTotals}</td>
+                        </tr>
+                    </tfoot>
+                      
                 </>
             }
         </table>

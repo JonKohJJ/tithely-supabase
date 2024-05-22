@@ -22,10 +22,7 @@ import Settings from "./pages/Settings"
 import Signup from "./pages/Signup"
 
 function App() {
-  console.log('Rendering App component');
   const { user, session } = useAuthContext()
-  console.log('User:', user);
-  console.log('Session:', session);
 
   const { types, fetchTypesError } = useFetchTypes()
   const { categories, fetchCategoriesError } = useFetchCategories()

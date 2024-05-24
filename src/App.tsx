@@ -53,10 +53,15 @@ function App() {
 
   // Light/Dark mode
   const [isDark, setIsDark] = useState(true)
-  // Store isDark Boolean In Local Storage
-  useEffect(() => {
-    window.localStorage.setItem('TITHELY_IS_DARK', JSON.stringify(isDark))
-}, [isDark])
+    // Store isDark Boolean In Local Storage
+    useEffect(() => {
+      window.localStorage.setItem('TITHELY_IS_DARK', JSON.stringify(isDark))
+  }, [isDark])
+
+
+  // Base URL
+  const BASE_URL = "/tithely-supabase/"
+
 
   return (
     <div className="app min-h-[100vh] bg-color-background text-color-text" data-theme={isDark ? 'dark' : 'light'}>
@@ -66,18 +71,18 @@ function App() {
           {( user && session ) &&
             <>
               <Route element={<NotLoggedInLayout isDark={isDark} setIsDark={setIsDark} />}>
-                <Route path="/" element={<Home />}/>
-                <Route path="/style-guide" element={<StyleGuide />}/>
+                <Route path={`${BASE_URL}`} element={<Home />}/>
+                <Route path={`${BASE_URL}/style-guide`} element={<StyleGuide />}/>
                 <Route path="*" element={<NotFound404 />}/>
               </Route>
               <Route element={<LoggedInLayout isDark={isDark} setIsDark={setIsDark} />}>
-                <Route path="/login" element={ <Dashboard types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} filteredYear={filteredYear} setFilteredYear={setFilteredYear} filteredMonth={filteredMonth} setFilteredMonth={setFilteredMonth} /> }/>
-                <Route path="/signup" element={ <Dashboard types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} filteredYear={filteredYear} setFilteredYear={setFilteredYear} filteredMonth={filteredMonth} setFilteredMonth={setFilteredMonth} /> }/>
-                <Route path="/planner" element={ <Planner types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} /> }/>
-                <Route path="/tracker" element={ <Tracker types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} filteredYear={filteredYear} setFilteredYear={setFilteredYear} filteredMonth={filteredMonth} setFilteredMonth={setFilteredMonth} /> }/>
-                <Route path="/dashboard" element={ <Dashboard types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} filteredYear={filteredYear} setFilteredYear={setFilteredYear} filteredMonth={filteredMonth} setFilteredMonth={setFilteredMonth} /> }/>
-                <Route path="/settings" element={<Settings />}/>
-                <Route path="/style-guide" element={<StyleGuide />}/>
+                <Route path={`${BASE_URL}/login`} element={ <Dashboard types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} filteredYear={filteredYear} setFilteredYear={setFilteredYear} filteredMonth={filteredMonth} setFilteredMonth={setFilteredMonth} /> }/>
+                <Route path={`${BASE_URL}/signup`} element={ <Dashboard types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} filteredYear={filteredYear} setFilteredYear={setFilteredYear} filteredMonth={filteredMonth} setFilteredMonth={setFilteredMonth} /> }/>
+                <Route path={`${BASE_URL}/planner`} element={ <Planner types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} /> }/>
+                <Route path={`${BASE_URL}/tracker`} element={ <Tracker types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} filteredYear={filteredYear} setFilteredYear={setFilteredYear} filteredMonth={filteredMonth} setFilteredMonth={setFilteredMonth} /> }/>
+                <Route path={`${BASE_URL}/dashboard`} element={ <Dashboard types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} filteredYear={filteredYear} setFilteredYear={setFilteredYear} filteredMonth={filteredMonth} setFilteredMonth={setFilteredMonth} /> }/>
+                <Route path={`${BASE_URL}/settings`} element={<Settings />}/>
+                <Route path={`${BASE_URL}/style-guide`} element={<StyleGuide />}/>
                 <Route path="*" element={<NotFound404 />}/>
               </Route>
               
@@ -86,14 +91,14 @@ function App() {
 
           { !( user && session ) &&
             <Route element={<NotLoggedInLayout isDark={isDark} setIsDark={setIsDark} />}>
-              <Route path="/" element={<Home />}/>
-              <Route path="/login" element={<Login isDark={isDark} />}/>
-              <Route path="/signup" element={<Signup isDark={isDark} />}/>
-              <Route path="/planner" element={ <Login isDark={isDark} /> }/>
-              <Route path="/tracker" element={ <Login isDark={isDark} /> }/>
-              <Route path="/dashboard" element={ <Login isDark={isDark} /> }/>
-              <Route path="/settings" element={ <Login isDark={isDark} /> }/>
-              <Route path="/style-guide" element={<StyleGuide />}/>
+              <Route path={`${BASE_URL}/planner`} element={<Home />}/>
+              <Route path={`${BASE_URL}/login`} element={<Login isDark={isDark} />}/>
+              <Route path={`${BASE_URL}/signup`} element={<Signup isDark={isDark} />}/>
+              <Route path={`${BASE_URL}/planner`} element={ <Login isDark={isDark} /> }/>
+              <Route path={`${BASE_URL}/tracker`} element={ <Login isDark={isDark} /> }/>
+              <Route path={`${BASE_URL}/dashboard`} element={ <Login isDark={isDark} /> }/>
+              <Route path={`${BASE_URL}/settings`} element={ <Login isDark={isDark} /> }/>
+              <Route path={`${BASE_URL}/style-guide`} element={<StyleGuide />}/>
               <Route path="*" element={<NotFound404 />}/>
             </Route>
           }

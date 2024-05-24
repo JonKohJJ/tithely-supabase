@@ -62,7 +62,7 @@ function App() {
   return (
     <div className="app min-h-[100vh] bg-color-background text-color-text" data-theme={isDark ? 'dark' : 'light'}>
 
-      <Router basename="/tithely-supabase">
+      <Router>
         <Routes>
           {( user && session ) &&
             <>

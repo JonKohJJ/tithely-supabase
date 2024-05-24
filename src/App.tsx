@@ -20,6 +20,7 @@ import Login from "./pages/Login"
 import StyleGuide from "./pages/StyleGuide"
 import Settings from "./pages/Settings"
 import Signup from "./pages/Signup"
+import NotFound404 from "./pages/NotFound404"
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
               <Route element={<NotLoggedInLayout isDark={isDark} setIsDark={setIsDark} />}>
                 <Route path="/" element={<Home />}/>
                 <Route path="/style-guide" element={<StyleGuide />}/>
+                <Route path="*" element={<NotFound404 />}/>
               </Route>
               <Route element={<LoggedInLayout isDark={isDark} setIsDark={setIsDark} />}>
                 <Route path="/login" element={ <Dashboard types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} filteredYear={filteredYear} setFilteredYear={setFilteredYear} filteredMonth={filteredMonth} setFilteredMonth={setFilteredMonth} /> }/>
@@ -76,7 +78,9 @@ function App() {
                 <Route path="/dashboard" element={ <Dashboard types={types} fetchTypesError={fetchTypesError} categories={categories} fetchCategoriesError={fetchCategoriesError} filteredYear={filteredYear} setFilteredYear={setFilteredYear} filteredMonth={filteredMonth} setFilteredMonth={setFilteredMonth} /> }/>
                 <Route path="/settings" element={<Settings />}/>
                 <Route path="/style-guide" element={<StyleGuide />}/>
+                <Route path="*" element={<NotFound404 />}/>
               </Route>
+              
             </>
           }
 
@@ -90,6 +94,7 @@ function App() {
               <Route path="/dashboard" element={ <Login isDark={isDark} /> }/>
               <Route path="/settings" element={ <Login isDark={isDark} /> }/>
               <Route path="/style-guide" element={<StyleGuide />}/>
+              <Route path="*" element={<NotFound404 />}/>
             </Route>
           }
       

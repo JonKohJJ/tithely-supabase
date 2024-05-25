@@ -88,7 +88,7 @@ function App() {
 
           { !( user && session ) &&
             <Route element={<NotLoggedInLayout isDark={isDark} setIsDark={setIsDark} />}>
-              <Route path={`/planner`} element={<Home />}/>
+              <Route path={`/`} element={<Home />}/>
               <Route path={`/login`} element={<Login isDark={isDark} />}/>
               <Route path={`/signup`} element={<Signup isDark={isDark} />}/>
               <Route path={`/planner`} element={ <Login isDark={isDark} /> }/>

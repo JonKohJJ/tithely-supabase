@@ -68,7 +68,7 @@ function App() {
           {( user && session ) &&
             <>
               <Route element={<NotLoggedInLayout isDark={isDark} setIsDark={setIsDark} />}>
-                <Route index element={<Home />}/>
+                <Route path={`/`} element={<Home />}/>
                 <Route path={`/style-guide`} element={<StyleGuide />}/>
                 <Route path="*" element={<NotFound404 />}/>
               </Route>

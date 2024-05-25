@@ -5,5 +5,5 @@ import { resolve } from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/tithely-supabase",
+  base: "/tithely-supabase/",
 })

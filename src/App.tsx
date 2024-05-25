@@ -68,7 +68,7 @@ function App() {
           {( user && session ) &&
             <>
               <Route element={<NotLoggedInLayout isDark={isDark} setIsDark={setIsDark} />}>
-                <Route path={``} element={<Home />}/>
+                <Route path={`/tithely-supabase`} element={<Home />}/>
                 <Route path={`/style-guide`} element={<StyleGuide />}/>
                 <Route path="*" element={<NotFound404 />}/>
               </Route>

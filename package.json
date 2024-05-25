@@ -1,6 +1,6 @@
 {
   "name": "tithely-supabase",
-  "homepage": "https://jonkohjj.github.io/tithely-supabase",
+  // "homepage": "https://jonkohjj.github.io/tithely-supabase/",
   "private": true,
   "version": "0.0.0",
   "type": "module",

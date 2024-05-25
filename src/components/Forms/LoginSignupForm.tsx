@@ -30,7 +30,7 @@ const LoginSignupForm = ({ isDark } : { isDark: boolean }) => {
             theme={`${isDark ? 'dark' : 'light'}`}
             providers={['google', 'github']}
             onlyThirdPartyProviders
-            redirectTo='http://localhost:5173/dashboard'
+            redirectTo='https://jonkohjj.github.io/tithely-supabase/dashboard'
         />
   </div>
   )

@@ -64,7 +64,6 @@ function App() {
 
       {/* <Router> */}
       <Router basename="/tithely-supabase/">
-      {/* "homepage": "https://jonkohjj.github.io/tithely-supabase/", */}
         <Routes>
           {( user && session ) &&
             <>
